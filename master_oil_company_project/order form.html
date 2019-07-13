@@ -1,0 +1,57 @@
+<?phpif( !empty($_POST["qtyA"]) )
+{
+    $qtyA = $_POST["qtyA"];
+    $totalA = $qtyA * 1.25;
+}
+else
+{
+    $qtyA = 0;
+    $totalA = 0;
+}
+ 
+if( !empty($_POST["qtyB"]) )
+{
+    $qtyB = $_POST["qtyB"];
+    $totalB = $qtyB * 2.35;
+}
+else
+{
+    $qtyB = 0;
+    $totalB = 0;
+}
+ 
+if( !empty($_POST["qtyC"]) )
+{
+    $qtyC = $_POST["qtyC"];
+    $totalC = $qtyC * 3.45;
+}
+else
+{
+    $qtyC = 0;
+    $totalC = 0;
+}
+ 
+$GrandTotal = $totalA + $totalB + $totalC;
+$mailto = "orders@ourdomain.com";
+$subject = "Web Order";
+ 
+$body  = "The following confirms the details of your order:\n";
+$body .= "\n\n";
+$body .= "Name: " . $Name . "\n";
+$body .= "Email: " . $Email . "\n";
+$body .= "Other Contact Info: " . $OtherInfo . "\n";
+$body .= "\n\n";
+$body .= "Class A Widgets: (" . $qtyA . " * 1.25) = " . $totalA . "\n";
+$body .= "Class B Widgets: (" . $qtyB . " * 2.35) = " . $totalB . "\n";
+$body .= "Class C Widgets: (" . $qtyC . " * 3.45) = " . $totalC . "\n";
+$body .= "\n";
+$body .= "TOTALS: " . $GrandTotal . "\n";
+ 
+mail($mailto, $subject, $body);
+mail($Email, $subject, $body);
+echo "The following information was sent.";
+echo "<br>\n";
+echo "<pre>\n";
+echo $body;
+echo "</pre>\n";
+?>
